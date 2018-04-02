@@ -1,0 +1,45 @@
+{
+  "name": "vue-remark",
+  "version": "0.1.0",
+  "description": "",
+  "main": "dist/vue-remark.cjs.js",
+  "module": "dist/vue-remark.es.js",
+  "browser": "dist/vue-remark.min.js",
+  "unpkg": "dist/vue-remark.min.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "npm run build:webpack && npm run build:bili",
+    "build:webpack": "webpack --mode production -o ./dist/vue-remark.min.js",
+    "build:bili": "bili --format es,cjs --moduleName VueRemark"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cool-cousin/vue-remark.git"
+  },
+  "keywords": [
+    "vue",
+    "vue-remark",
+    "markdown"
+  ],
+  "author": "Guy Levi <guy@coolcousin.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cool-cousin/vue-remark/issues"
+  },
+  "homepage": "https://github.com/cool-cousin/vue-remark#readme",
+  "dependencies": {
+    "rehype-react": "^3.0.2",
+    "remark-parse": "^5.0.0",
+    "remark-rehype": "^3.0.0",
+    "unified": "^6.1.6"
+  },
+  "devDependencies": {
+    "bili": "^3.0.14",
+    "rollup-plugin-node-builtins": "^2.1.2",
+    "rollup-plugin-node-globals": "^1.2.0",
+    "webpack": "^4.4.1",
+    "webpack-cli": "^2.0.13"
+  }
+}
