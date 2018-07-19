@@ -1,7 +1,7 @@
 {
   "name": "vue-remark",
-  "version": "0.1.0",
-  "description": "",
+  "version": "0.2.0",
+  "description": "Dynamically render Vue components from Markdown using Remark",
   "main": "dist/vue-remark.cjs.js",
   "module": "dist/vue-remark.es.js",
   "browser": "dist/vue-remark.min.js",
@@ -10,9 +10,11 @@
     "dist"
   ],
   "scripts": {
+    "playground": "parcel playground/index.html -d playground/output --open",
     "build": "npm run build:webpack && npm run build:bili",
     "build:webpack": "webpack --mode production -o ./dist/vue-remark.min.js",
-    "build:bili": "bili --format es,cjs --moduleName VueRemark"
+    "build:bili": "bili --format es,cjs --moduleName VueRemark",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -33,12 +35,17 @@
     "rehype-react": "^3.0.2",
     "remark-parse": "^5.0.0",
     "remark-rehype": "^3.0.0",
-    "unified": "^6.1.6"
+    "unified": "^7.0.0",
+    "vue-hot-reload-api": "^2.3.0"
   },
   "devDependencies": {
     "bili": "^3.0.14",
+    "parcel-bundler": "^1.9.7",
+    "remark-external-links": "^2.0.0",
     "rollup-plugin-node-builtins": "^2.1.2",
     "rollup-plugin-node-globals": "^1.2.0",
+    "vue": "^2.5.16",
+    "vue-template-compiler": "^2.5.16",
     "webpack": "^4.4.1",
     "webpack-cli": "^2.0.13"
   }

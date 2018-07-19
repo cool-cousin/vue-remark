@@ -1,17 +1,15 @@
 const rComponent = /^@\[(\w+)\]\(([^()]*)\)/
 
-function tokenizeComponent (eat, value, silent) {
-  const match = rComponent.exec(value)
+function tokenizeComponent (eat, text, silent) {
+  const match = rComponent.exec(text)
   if (!match) return null
   if (silent) return true
-  const [all, component, props] = match
-  return eat(all)({ type: 'component', component, props })
+  const [all, component, value] = match
+  return eat(all)({ type: 'component', component, value })
 }
 
-tokenizeComponent.locator = (value, fromIndex) => value.indexOf('@[', fromIndex)
-
 export default function parseComponents () {
-  const { inlineTokenizers, inlineMethods } = this.Parser.prototype
-  inlineTokenizers.component = tokenizeComponent
-  inlineMethods.splice(inlineMethods.indexOf('link'), 0, 'component')
+  const { blockTokenizers, blockMethods } = this.Parser.prototype
+  blockTokenizers.component = tokenizeComponent
+  blockMethods.unshift('component')
 }

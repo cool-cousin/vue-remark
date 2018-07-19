@@ -1,0 +1,24 @@
+body {
+  margin: 0;
+}
+
+main {
+  display: flex;
+  height: 100%;
+}
+
+textarea, article {
+  width: 50%;
+  display: inline-block;
+  word-wrap: break-word;
+  padding: 1em;
+}
+
+textarea {
+  background-color: #f0f0f0;
+}
+
+blockquote {
+  background-color: #fafafa;
+  padding: 1em;
+}

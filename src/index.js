@@ -7,40 +7,29 @@ import parseComponents from './parse'
 export default {
   name: 'VueRemark',
   functional: true,
-  inject: {
-    mdComponents: {
-      default: {}
-    }
-  },
-  render (createElement, context) {
-    const [slot] = context.slots().default
-    const { mdComponents } = context.injections
+  render (h, context) {
+    const [ slot ] = context.slots().default
+    const components = Object(context.props.components)
 
     const handlers = {
-      component (h, node) {
-        const mdComponent = mdComponents[node.component]
-
-        if (typeof mdComponent === 'function') return mdComponent(h, node)
-        if (typeof mdComponent === 'string') return h(node, mdComponent)
-
-        const { props } = Object(mdComponent)
-        return h(node, node.component, {
-          props: typeof props === 'function' ? props(node.props) : null
-        })
+      component (toHast, node) {
+        const { component, value } = node
+        const props = components[component]
+        return toHast(node, component, typeof props === 'function' ? props(value) : { value })
       }
     }
 
-    const components = Object.keys(mdComponents).reduce((components, name) => {
-      const { component } = mdComponents[name]
-      if (component) components[name] = component
-      return components
-    }, {})
-
     return unified()
       .use(markdown)
+      .use(context.props.plugins)
       .use(parseComponents)
       .use(remark2rehype, { handlers })
-      .use(rehype2react, { createElement, components, prefix: false })
+      .use(rehype2react, {
+        prefix: false,
+        createElement (component, attrs, children) {
+          return h(component, { attrs }, children)
+        }
+      })
       .processSync(slot.text).contents
   }
 }
