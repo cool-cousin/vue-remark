@@ -35,8 +35,7 @@
     "rehype-react": "^3.0.2",
     "remark-parse": "^5.0.0",
     "remark-rehype": "^3.0.0",
-    "unified": "^7.0.0",
-    "vue-hot-reload-api": "^2.3.0"
+    "unified": "^7.0.0"
   },
   "devDependencies": {
     "bili": "^3.0.14",
@@ -45,6 +44,7 @@
     "rollup-plugin-node-builtins": "^2.1.2",
     "rollup-plugin-node-globals": "^1.2.0",
     "vue": "^2.5.16",
+    "vue-hot-reload-api": "^2.3.0",
     "vue-template-compiler": "^2.5.16",
     "webpack": "^4.4.1",
     "webpack-cli": "^2.0.13"
