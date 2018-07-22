@@ -9,13 +9,21 @@ export default {
   functional: true,
   render (h, context) {
     const [ slot ] = context.slots().default
-    const components = Object(context.props.components)
+    const components = {}
+
+    const createElement = (tag, attrs, children) => {
+      const isComponent = tag in components
+      const key = isComponent ? attrs.value : undefined
+      const vnode = h(tag, { attrs, key }, children)
+      if (!isComponent || vnode.componentOptions) return vnode
+    }
 
     const handlers = {
+      // convert component nodes to HAST
       component (toHast, node) {
         const { component, value } = node
-        const props = components[component]
-        return toHast(node, component, typeof props === 'function' ? props(value) : { value })
+        components[component] = true
+        return toHast(node, component, { value })
       }
     }
 
@@ -24,12 +32,7 @@ export default {
       .use(context.props.plugins)
       .use(parseComponents)
       .use(remark2rehype, { handlers })
-      .use(rehype2react, {
-        prefix: false,
-        createElement (component, attrs, children) {
-          return h(component, { attrs }, children)
-        }
-      })
+      .use(rehype2react, { createElement, prefix: false })
       .processSync(slot.text).contents
   }
 }
