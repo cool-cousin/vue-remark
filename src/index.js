@@ -13,7 +13,7 @@ export default {
 
     const createElement = (tag, attrs, children) => {
       const isComponent = tag in components
-      const key = isComponent ? attrs.value : undefined
+      const key = isComponent ? `${tag}-${attrs.value}` : undefined
       const vnode = h(tag, { attrs, key }, children)
       if (!isComponent || vnode.componentOptions) return vnode
     }
