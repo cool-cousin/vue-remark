@@ -1,4 +1,4 @@
-const rComponent = /^@\[(\w+)\]\(([^()]*)\)/
+const rComponent = /^@\[([-\w]+)\]\(([^()]*)\)/
 
 function tokenizeComponent (eat, text, silent) {
   const match = rComponent.exec(text)

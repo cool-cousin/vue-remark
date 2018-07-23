@@ -1,6 +1,6 @@
 {
   "name": "vue-remark",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Dynamically render Vue components from Markdown using Remark",
   "main": "dist/vue-remark.cjs.js",
   "module": "dist/vue-remark.es.js",
