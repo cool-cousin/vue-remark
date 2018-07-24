@@ -10,3 +10,10 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+blockquote {
+  background-color: #fafafa;
+  padding: 1em;
+}
+</style>
